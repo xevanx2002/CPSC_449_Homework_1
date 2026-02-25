@@ -184,4 +184,27 @@ public class BookController {
         books.remove(existing.get());
         return ResponseEntity.noContent().build();
     }
+    
+    // Pagination Helper
+    private List<Book> paginateList(List<Book> list, int page, int size) {
+        if (page < 0) page = 0;
+        if (size <= 0) size = 5;
+
+        int start = page * size;
+        if (start >= list.size()) {
+            return new ArrayList<>();
+        }
+
+        int end = Math.min(start + size, list.size());
+        return list.subList(start, end);
+    }
+
+    // GET Pagination
+    @GetMapping("/books/paged")
+    public List<Book> getBooksPaged(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size
+    ) {
+        return paginateList(books, page, size);
+    }
 }

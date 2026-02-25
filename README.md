@@ -9,3 +9,6 @@
 
 ## Testing Delete Functionality
 ![alt text](image-3.png)
+
+## Testing Pagination Functionality
+![alt text](image-4.png)
